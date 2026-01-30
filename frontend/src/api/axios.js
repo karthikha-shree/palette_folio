@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: 'https://palette-folio.vercel.app/api',
 });
 
 // Add token to requests if user is logged in
