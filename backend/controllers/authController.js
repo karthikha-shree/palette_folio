@@ -2,14 +2,53 @@ import User from '../models/User.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
+// Validation functions
+const isValidEmail = (email) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+
+const isValidName = (name) => {
+  return name.trim().length >= 2 && name.trim().length <= 50;
+};
+
+const isStrongPassword = (password) => {
+  const hasUpperCase = /[A-Z]/.test(password);
+  const hasLowerCase = /[a-z]/.test(password);
+  const hasNumbers = /\d/.test(password);
+  const hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password);
+  const isLengthValid = password.length >= 8;
+
+  return hasUpperCase && hasLowerCase && hasNumbers && hasSpecialChar && isLengthValid;
+};
+
 // REGISTER
 export const registerUser = async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
+    // Validate inputs
+    if (!name || !email || !password) {
+      return res.status(400).json({ message: 'All fields are required' });
+    }
+
+    if (!isValidName(name)) {
+      return res.status(400).json({ message: 'Name must be between 2 and 50 characters' });
+    }
+
+    if (!isValidEmail(email)) {
+      return res.status(400).json({ message: 'Please provide a valid email address' });
+    }
+
+    if (!isStrongPassword(password)) {
+      return res.status(400).json({
+        message: 'Password must be at least 8 characters and contain uppercase, lowercase, numbers, and special characters'
+      });
+    }
+
     const userExists = await User.findOne({ email });
     if (userExists) {
-      return res.status(400).json({ message: 'User already exists' });
+      return res.status(400).json({ message: 'Email already registered' });
     }
 
     const salt = await bcrypt.genSalt(10);
