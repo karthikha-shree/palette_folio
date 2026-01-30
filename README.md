@@ -2,7 +2,7 @@
 
 PaletteFolio is a **full-stack MERN application** that allows developers and designers to explore, preview, **customize**, and save modern color palettes for portfolio websites.
 
-Users can browse curated system themes, see how each palette looks on a mock portfolio layout, and — after authentication — **create their own custom themes with live preview**, then save them to a personal dashboard.
+Users can browse curated system themes, see how each palette looks on a mock portfolio layout and after authentication  **create their own custom themes with live preview**, then save them to a personal dashboard.
 
 This project is built with real-world SaaS architecture in mind, including authentication, protected routes, and user-specific data storage.
 
