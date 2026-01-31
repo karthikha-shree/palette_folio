@@ -21,9 +21,10 @@ const MockPortfolio = ({ theme, canInteract, onSave }) => {
           PORTFOLIO<span style={{ color: colors.primary }}>.</span>
         </div>
         <div className="hidden md:flex gap-6 text-sm font-medium">
+          <span style={{ color: colors.primary }} className="cursor-pointer">About</span>
           <span className="opacity-70 hover:opacity-100 cursor-pointer">Work</span>
-          <span className="opacity-70 hover:opacity-100 cursor-pointer">About</span>
-          <span style={{ color: colors.primary }} className="cursor-pointer">Contact</span>
+          <span className="opacity-70 hover:opacity-100 cursor-pointer">Contact</span>
+          
         </div>
       </nav>
 
